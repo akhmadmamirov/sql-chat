@@ -1,6 +1,7 @@
 import sqlite3
 from langchain.tools import Tool
-
+from pydantic.v1 import BaseModel
+from typing import List
 conn = sqlite3.connect("db.sqlite")
 
 
@@ -10,6 +11,8 @@ def list_tables():
     rows = c.fetchall()
     return "\n".join(row[0] for row in rows if row[0] is not None)
 
+class RunQueryArgsSchema(BaseModel):
+    query: str
 
 def run_sqlite_query(query):
     c = conn.cursor()
@@ -23,7 +26,8 @@ def run_sqlite_query(query):
 run_query_tool = Tool.from_function(
     name="run_sqlite_query",
     description="Run a sqlite query.",
-    func=run_sqlite_query
+    func=run_sqlite_query,
+    args_schema=RunQueryArgsSchema
 )
 
 
