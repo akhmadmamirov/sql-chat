@@ -13,6 +13,9 @@ def list_tables():
 
 class RunQueryArgsSchema(BaseModel):
     query: str
+    
+class DescribeTablesArgsSchema(BaseModel):
+    table_names: List[str]
 
 def run_sqlite_query(query):
     c = conn.cursor()
@@ -41,5 +44,6 @@ def describe_tables(table_names):
 describe_tables_tool = Tool.from_function(
     name="describe_tables",
     description="Given a list of table names, returns the schema of those tables",
-    func=describe_tables
+    func=describe_tables,
+    args_schema=DescribeTablesArgsSchema
 )
