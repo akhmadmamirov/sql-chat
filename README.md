@@ -21,6 +21,7 @@ Technical Complexity Handling:
 <img width="500" alt="sql-chat" src="https://github.com/akhmadmamirov/sql-chat/assets/105142060/ffec0d54-d469-4ed3-afb7-013a56fc30c7">
 
 ## Getting Started:
+* create .env file and with OPENAI_API_KEY and PINECONE_API_KEY variables of your own.
 * python main.py 
 
 Credits:
